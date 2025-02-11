@@ -21,9 +21,14 @@ public class FinanceController {
 
     }
 
-    @PostMapping
-    public Finance createTransaction(@RequestBody Finance finance) {
+    @PostMapping()
+    public Finance createFinance(@RequestBody Finance finance) {
         return financeService.createFinance(finance);
+    }
+
+    @GetMapping("/{id}")
+    public Finance getEntrybyID(@PathVariable("id") Integer id) {
+        return financeService.getEntryById(id);
     }
 
 

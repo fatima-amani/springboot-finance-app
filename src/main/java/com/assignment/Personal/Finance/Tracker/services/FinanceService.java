@@ -20,4 +20,9 @@ public class FinanceService {
     public Finance createFinance(Finance finance) {
         return financeRepository.save(finance);
     }
+
+    public Finance getEntryById(int id) {
+        return financeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Finance entry not found with id: " + id));
+    }
 }
