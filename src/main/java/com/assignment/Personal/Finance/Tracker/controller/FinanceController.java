@@ -37,6 +37,11 @@ public class FinanceController {
         return  financeService.updateEntryByID(finance,id);
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteEntryByID(@PathVariable("id") Integer id) {
+        return financeService.deleteEntryByID(id);
+    }
+
 
 
 }

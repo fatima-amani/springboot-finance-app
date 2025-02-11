@@ -37,4 +37,14 @@ public class FinanceService {
                 })
                 .orElseThrow(() -> new RuntimeException("Entry not found"));
     }
+
+    public String deleteEntryByID(int id) {
+        if (financeRepository.existsById(id)) {
+            financeRepository.deleteById(id);
+            return "Deleted successfully";
+        } else {
+            throw new RuntimeException("Entry not found with ID: " + id);
+        }
+    }
+
 }
