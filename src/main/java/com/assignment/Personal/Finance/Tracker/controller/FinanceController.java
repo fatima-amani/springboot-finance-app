@@ -31,5 +31,12 @@ public class FinanceController {
         return financeService.getEntryById(id);
     }
 
+    @PutMapping("/{id}")
+    public Finance updateEntryByID(@RequestBody Finance finance,
+            @PathVariable("id") Integer id) {
+        return  financeService.updateEntryByID(finance,id);
+    }
+
+
 
 }

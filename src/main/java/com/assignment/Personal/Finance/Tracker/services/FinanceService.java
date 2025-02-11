@@ -25,4 +25,16 @@ public class FinanceService {
         return financeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Finance entry not found with id: " + id));
     }
+
+    public Finance updateEntryByID(Finance finance, int id) {
+        return financeRepository.findById(id)
+                .map(entry -> {
+                    entry.setAmount(finance.getAmount());
+                    entry.setCategory(finance.getCategory());
+                    entry.setDate(finance.getDate());
+                    entry.setDescription(finance.getDescription());
+                    return financeRepository.save(entry);
+                })
+                .orElseThrow(() -> new RuntimeException("Entry not found"));
+    }
 }
