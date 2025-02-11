@@ -79,5 +79,8 @@ The API follows RESTful principles and exposes the following endpoints:
 ### 5. Delete an Entry
 **Endpoint:** `DELETE /api/v1/entries/{id}`
 
+### 6. Get Summary
+**Endpoint:** `GET /api/v1/entries/summary`
+
 
 
