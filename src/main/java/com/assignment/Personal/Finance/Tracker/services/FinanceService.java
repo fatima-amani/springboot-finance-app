@@ -1,6 +1,7 @@
 package com.assignment.Personal.Finance.Tracker.services;
 
 import com.assignment.Personal.Finance.Tracker.dto.Finance;
+import com.assignment.Personal.Finance.Tracker.dto.FinanceSummaryDTO;
 import com.assignment.Personal.Finance.Tracker.repo.FinanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,22 @@ public class FinanceService {
         } else {
             throw new RuntimeException("Entry not found with ID: " + id);
         }
+    }
+
+    public FinanceSummaryDTO getFinanceSummary() {
+        List<Finance> finances = financeRepository.findAll();
+
+        double totalIncome = finances.stream()
+                .filter(finance -> finance.getAmount() > 0) // Assuming positive amounts are income
+                .mapToDouble(Finance::getAmount)
+                .sum();
+
+        double totalExpenses = finances.stream()
+                .filter(finance -> finance.getAmount() < 0) // Assuming negative amounts are expenses
+                .mapToDouble(finance -> Math.abs(finance.getAmount())) // Convert to positive for sum
+                .sum();
+
+        return new FinanceSummaryDTO(totalIncome, totalExpenses);
     }
 
 }
